@@ -19,13 +19,13 @@ export const getPostById = async ( request, response) => {
 
 export const createPosts = async ( request, response ) => {
   try {
-    const {tittle, date, content, image, userId} = request.body
+    const {title, date, content, image, userId} = request.body
 
     const user = await User.findById(userId)
     console.log(user)
 
     const newPost = new Post ({
-      tittle,
+      title,
       date,
       content,
       image,
@@ -45,10 +45,10 @@ export const createPosts = async ( request, response ) => {
 
 export const updatePostById = async ( request, response ) => {
   const { id } = request.params
-  const { tittle, date, content } = request.body
+  const { title, date, content } = request.body
   const post = await Post.findOneAndUpdate(
     {_id: id}, 
-    { tittle, date, content, image},
+    { title, date, content, image},
     {returnOriginal: false})
   response.send({message: 'Se actualizo el usuario' , data: post}) 
 }

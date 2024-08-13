@@ -2,12 +2,15 @@ import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import User from "../models/User"
 
-const { JWT_SECRET } = process.env
+const { JWT_SECRET } = process.env 
 
 export const createSession = async (request, response) => {
 
-  const { email, password } = JSON.parse(request.body)
-  console.log(request.body)
+  const { email, password } = request.body
+
+  console.log("request body:", request.body)
+  console.log("email:", email)
+  console.log("password:", password)
 
   try {
 

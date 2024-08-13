@@ -8,7 +8,7 @@ import comentRouter from "./src/routes/comentRouter";
 import { loggerMiddleware } from "./src/middleware/logger";
 import sessionsRouter from "./src/routes/sessionRouter";
 import cors from "cors"
-import { DBConn } from "./src/config/database";
+import { DBConn } from "./src/lib/database";
 
 const app = express()
 const port = 8080

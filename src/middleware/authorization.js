@@ -1,6 +1,6 @@
 import { jwt } from "jsonwebtoken"; //'jsonwebtoken' is a library that is used to create and verify tokens.
 
-const { JWT_SECRET} = process.env //This line is used to get the secret key from the environment variables.
+const { JWT_SECRET } = process.env //This line is used to get the secret key from the environment variables.
 
 export const authorizationMiddleware = async (request, response, next) => {
 
