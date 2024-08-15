@@ -1,8 +1,6 @@
-import mongoose from "mongoose";
+const mongoose = require('mongoose');
 
-const { Schema, model } = mongoose
-
-const userSchema = new Schema({
+const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -28,12 +26,10 @@ const userSchema = new Schema({
     required: true,
   },
   posts: [{
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'posts',
   }]
 
 }, { timestamps: true })
 
-const User = model("users", userSchema) // users es el nombre de la colección en la base de datos
-
-export default User
+module.exports = mongoose.model('users', userSchema);

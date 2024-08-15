@@ -1,23 +1,20 @@
-import express from "express";
-import {} from "dotenv/config"
-import { jsonParser, xmlParser } from "./src/middleware/bodyParser";
-import todoPostRouter from "./src/routes/todoPostRouter";
-import todoUserRouter from "./src/routes/todoUserRouter";
-import registerRouter from "./src/routes/registerRouter";   
-import comentRouter from "./src/routes/comentRouter";
-import { loggerMiddleware } from "./src/middleware/logger";
-import sessionsRouter from "./src/routes/sessionRouter";
-import cors from "cors"
-import { DBConn } from "./src/lib/database";
+require("dotenv").config();
 
-const app = express()
-const port = 8080
+const server = require('./src/server');
+const db = require('./src/lib/database');
 
-DBConn()
+const port = process.env.PORT || 8080;
 
-app.use(jsonParser, xmlParser, loggerMiddleware, cors()) //middleware
-app.use(todoPostRouter, todoUserRouter, registerRouter, sessionsRouter, comentRouter)//routes
+db.connect()
+    .then(() => {
+        console.log('DB connected');
+        
+        server.listen(port, () => {
+            console.log(`Server is running on port ${port}`);
+        })
+    })
+    .catch((error) => {
+        console.error('DB connection error:', error);
+        process.exit(1);
+    });
 
-app.listen(port, ()=> {
-    console.log(`Aplicacion escuchando por el puerto ${port}`)
-})

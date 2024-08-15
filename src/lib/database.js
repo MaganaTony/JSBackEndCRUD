@@ -1,23 +1,15 @@
-import mongoose from "mongoose"; //mongoose is a library that allows us to interact with MongoDB.
+require('dotenv').config();
+const mongoose = require('mongoose');
 
-const {
-  DB_NAME,
-  DB_USERNAME,
-  DB_PASSWORD,
-  DB_HOSTNAME 
-} = process.env //This line is used to get the database credentials from the environment variables.
+const DB_USERNAME = process.env.DB_USERNAME;
+const DB_PASSWORD = process.env.DB_PASSWORD;
+const DB_HOSTNAME = process.env.DB_HOSTNAME;
+const DB_NAME = process.env.DB_NAME;
 
-const uri = `mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOSTNAME}/?retryWrites=true&w=majority&appName=${DB_NAME}`
+const url = `mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOSTNAME}/${DB_NAME}`;
 
-export const DBConn = async () => {
-  try {
-    await mongoose.connect(uri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-      })
-      console.log("Conexion con MongoDB exitosa!!")
-
-  } catch ( error ) {
-    console.log("Error al conectarse con MongoDB", error)
-  }
+function connect() {
+    return mongoose.connect(url);
 }
+
+module.exports = { connect }; 

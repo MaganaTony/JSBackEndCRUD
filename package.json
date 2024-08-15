@@ -1,35 +1,23 @@
 {
-  "name": "devto-backend",
+  "name": "bcknd-chal",
   "version": "1.0.0",
-  "description": "Backend de app devto",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon --exec babel-node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node --watch index.js"
   },
-  "author": "Abraham Covarrubias",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "@babel/core": "^7.22.10",
-    "@babel/node": "^7.22.10",
-    "@babel/preset-env": "^7.22.10",
-    "nodemon": "^3.0.1"
-  },
-  "babel": {
-    "presets": [
-      "@babel/preset-env"
-    ]
-  },
+  "description": "",
   "dependencies": {
-    "bcrypt": "^5.1.1",
-    "body-parser": "^1.20.2",
-    "body-parser-xml": "^2.0.5",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
-    "express": "^4.18.2",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "helmet": "^7.1.0",
+    "http-errors": "^2.0.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^7.5.0",
-    "morgan": "^1.10.0"
+    "mongoose": "^8.5.2"
   }
 }
