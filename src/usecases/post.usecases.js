@@ -5,9 +5,9 @@ async function createPost(data){
     const post = await Post.create(data);
     return post;
 }
-
+// get all posts from the database
 async function getPosts(){
-    const posts = await Post.find();
+    const posts = await Post.find({});
     return posts;
 }
 

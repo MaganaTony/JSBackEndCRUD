@@ -9,10 +9,9 @@ const router = express.Router();
 router.post('/', auth, async (request, response) => {
   try {
     const data = request.body;
-    console.log(data);
-    
+      
     const id = request.user._id;
-    data.userId = id;
+    data.user = id; 
     const newpost = await postUseCases.createPost(data);
     response.json({
       success: true,
@@ -34,7 +33,7 @@ router.get('/', async (request, response) => {
       const posts = await postUseCases.getPostsByTitle(search);
       return response.json({
         success: true,
-        message: `Posts with title ${search} found`,
+        message: `Posts with title "${search}" found`,
         data: {
           posts
         }
@@ -43,7 +42,7 @@ router.get('/', async (request, response) => {
       const posts = await postUseCases.getPosts();
       return response.json({
         success: true,
-        message: `Post with title ${search} not found, showing all posts`,
+        message: `Post with title "${search}" not found, showing all posts`,
         data: {
           posts
         }
@@ -60,7 +59,7 @@ router.patch('/:id', auth, async (request, response) => {
     const userId = request.user._id;
     const data = request.body;
 
-    const post = await postUseCases.getPostById(id);
+    const post = await postUseCases.getPostById(id);    
 
     if (!post) {
       return response.status(404).json({
@@ -68,7 +67,7 @@ router.patch('/:id', auth, async (request, response) => {
         message: 'Post not found'
       })
     }
-    if (post.userId.toString() !== userId.toString()) {
+    if (post.user.toString() !== userId.toString()) {
       return response.status(401).json({
         success: false,
         message: 'Unauthorized'
@@ -90,39 +89,38 @@ router.patch('/:id', auth, async (request, response) => {
   }
 });
 
-router.delete('/:id', async (request, response) => {
+router.delete('/:id', auth, async (request, response) => {
   try {
     const { id } = request.params;
     const userId = request.user._id;
 
-    const post = await postUseCases.getPostById(id);
+    const post = await postUseCases.getPostById(id);       
 
     if (!post) {
       return response.status(404).json({
         success: false,
-        message: 'Post was not found',
-      });
+        message: 'Post not found'
+      })
     }
-
     if (post.user.toString() !== userId.toString()) {
-      return response.status(403).json({
+      return response.status(401).json({
         success: false,
-        message: 'Unauthorized',
-      });
+        message: 'Unauthorized'
+      })
     }
 
-    const postDeleted = await postUseCases.deletePostById(id);
-
-    response.json({
+    const post2Delete = await postUseCases.deletePostById(id);
+    return response.json({
       success: true,
-      message: 'The post was deleted',
-      data: { post: postDeleted },
-    });
+      message: 'Post deleted',
+      data: {
+        post2Delete
+      }
+    })
+
+
   } catch (error) {
-    response.status(error.status || 500).json({
-      success: false,
-      message: error.message,
-    });
+    response.status(error.status || 500).send({ error: error.message, success: false });
   }
 });
 

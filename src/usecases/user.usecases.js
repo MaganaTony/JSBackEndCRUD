@@ -43,9 +43,15 @@ async function updateUserById(id){
     return user;
 }
 
+async function getById(id){
+    const user = await User.findById(id);
+    return user;
+}
+
 async function login(data) {
     const user = await User.findOne( {email: data.email} ).select('+password');
-
+    console.log(user);
+        
     if (!user) {
         throw createError(401, 'The user does not exist');
     }
@@ -65,6 +71,7 @@ async function login(data) {
 module.exports = {
     createUser,
     getUserById,
+    getById,
     updateUserById,
     login
 }
