@@ -50,7 +50,7 @@ We will need to create our own users
 ___
 
 + POST users/register
-  - This **This will require a `name`, `email` and `password` as a JSON**
+  - **This will require a `name`, `email` and `password` as a JSON**
 
 ``` js
 {
@@ -64,4 +64,40 @@ ___
 
 ```
 
++ POST users/login
+  - **This will require your `email` and `password` as a JSON**
+
+``` js
+{
+  "email": "test@gmail.com",
+  "password": "admintest"
+}
+
+```
+- The response will have a token which you will need to copy somwhere safe and it will be valid for `1 day`
+
++ Now for the posts
+ - POST /posts
+  - **This will require as a JSON the following:**
+
+``` js
+{
+  "title": "El test numero 1",
+  "content": "Lorem Ipsum Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum",
+  "image": "Aqui va un URL"
+}
+```
+
+- GET /posts
+  - You receive all the posts available
+  - If you pass a value called search and add a title it will return a post that matches that title if it exists
+
+- PATCH /posts/:id
+
+  - It updates the post you chose
+  - `Note: ` it will require the token which can be passed down via Auth with Bearer format, copy the token there.
+
+- DELETE /posts/:id
+  - It deletes the post
+  - `Note: ` it will require the token which can be passed down via Auth with Bearer format, copy the token there.
 
