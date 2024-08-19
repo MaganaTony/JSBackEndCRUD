@@ -95,9 +95,9 @@ ___
 - PATCH /posts/:id
 
   - It updates the post you chose
-  - `Note: ` it will require the token which can be passed down via Auth with Bearer format, copy the token there.
+  - `Note:` it will require the token which can be passed down via Auth with Bearer format, copy the token there.
 
 - DELETE /posts/:id
   - It deletes the post
-  - `Note: ` it will require the token which can be passed down via Auth with Bearer format, copy the token there.
+  - `Note:` it will require the token which can be passed down via Auth with Bearer format, copy the token there.
 
