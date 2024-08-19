@@ -20,10 +20,48 @@ The project uses Javascript on it's entirety and Node to install packages such a
 
 
 ## How do we install it?
-___
+
+First we need to clone the repository on your machine with Git
+
+        git clone `git@github.com:MaganaTony/desafioBackendG34.git`
+
 On the root folder for the project we will need to run
 
         npm install
 
+
+## You will need to create a new file .env for all of the variables needed for the code, you can start this off by creating and .env file:
+
+        touch .env
+
+Then copy and paste the code inside the file .`.env.example` inside of the new file but replace the example with your own data
+
+        DB_USER=<TU_USUARIO_DE_BASE_DE_DATOS>
+        DB_PASSWORD=<TU_CONTRASEÑA_DE_BASE_DE_DATOS>
+        DB_HOST=<HOST_DE_TU_BASE_DE_DATOS>
+        DB_NAME=<NOMBRE_DE_TU_BASE_DE_DATOS>
+        JWT_SECRET=<TU_SECRETO_DE_JWT>
+
+# Now the routes the API has and how do we make them work?
+
+## Let's start with our users
+
+We will need to create our own users
+___
+
++ POST users/register
+  - This **This will require a `name`, `email` and `password` as a JSON**
+
+``` js
+{
+  "name": "Charles",
+  "lastName":"Magana",
+  "user": "maganatony",
+  "avatar": "url goes here",
+  "email": "test@gmail.com",
+  "password": "admintest"
+}
+
+```
 
 
