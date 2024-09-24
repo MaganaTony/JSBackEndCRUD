@@ -9,16 +9,12 @@ const router = express.Router();
 router.post('/login', async (request, response) => {
     try {
         const data = request.body;
-        console.log(data);
-        
         const token = await userUseCases.login(data);
 
         response.json({
             success: true,
             message: 'Login success',
-            data: {
-                token
-            }
+            data: {id, token},
         })
     } catch (error) {
         response.status(error.status || 501).send({ error: error.message, success: false });

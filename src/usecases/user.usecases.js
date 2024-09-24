@@ -64,7 +64,7 @@ async function login(data) {
 
     const token = jwt.sign( {id: user._id} );
 
-    return token;
+    return { token, user, id: user._id }; // Mostrar token y datos de user
 
 }
 
