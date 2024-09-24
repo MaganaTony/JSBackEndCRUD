@@ -53,6 +53,31 @@ router.get('/', async (request, response) => {
   }
 });
 
+// Get post by ID
+router.get("/:id", async (request, response) => {
+  try {
+    const id = request.params.id;
+    const post = await postUseCases.getPostById(id);
+
+    if (!post) {
+      return response.status(404).json({
+        success: false,
+        message: "Post not found",
+      });
+    }
+
+    response.json({
+      success: true,
+      data: { post: post },
+    });
+  } catch (error) {
+    response.status(error.status || 500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
 router.patch('/:id', auth, async (request, response) => {
   try {
     const { id } = request.params;

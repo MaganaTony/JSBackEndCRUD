@@ -17,6 +17,15 @@ const postSchema = new mongoose.Schema({
     ref: 'users',
     required: true
   },
+  hashtags: {
+    type: [String],
+    validate: {
+      validator: function (v) {
+        return v.length <= 4;
+      },
+      message: "You can add up to 4 hashtags"
+    },
+  },
   coments: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "coments"
